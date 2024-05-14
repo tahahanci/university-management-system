@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/UniversityManagementSystem.iml" filepath="$PROJECT_DIR$/UniversityManagementSystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/authservice/authservice.iml" filepath="$PROJECT_DIR$/authservice/authservice.iml" />
       <module fileurl="file://$PROJECT_DIR$/studentservice/studentservice.iml" filepath="$PROJECT_DIR$/studentservice/studentservice.iml" />
     </modules>
   </component>
