@@ -1,5 +1,6 @@
 package com.hncdev.authservice.core.configuration;
 
+import com.hncdev.authservice.core.filters.JwtAuthFilter;
 import com.hncdev.authservice.services.abstracts.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -12,6 +13,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @RequiredArgsConstructor
@@ -19,11 +21,15 @@ public class SecurityConfiguration {
 
     private final PasswordEncoder passwordEncoder;
     private final UserService userService;
+    private final JwtAuthFilter jwtAuthFilters;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable).authorizeRequests(req -> req
-                        .anyRequest().permitAll());
+        http.csrf(AbstractHttpConfigurer::disable)
+                .authorizeRequests(req -> req
+                        .requestMatchers("api/v1/test/**").authenticated()
+                        .anyRequest().permitAll())
+                .addFilterBefore(jwtAuthFilters, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 

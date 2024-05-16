@@ -7,5 +7,5 @@ public interface AuthService {
 
     void register(RegisterStudentRequest registerStudentRequest);
 
-    void login(LoginStudentRequest loginStudentRequest);
+    String login(LoginStudentRequest loginStudentRequest);
 }
