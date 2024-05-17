@@ -6,6 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="discoveryserver" />
+        <module name="dormitoryservice" />
         <module name="authservice" />
         <module name="studentservice" />
       </profile>
@@ -14,6 +16,8 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="authservice" options="-parameters" />
+      <module name="discoveryserver" options="-parameters" />
+      <module name="dormitoryservice" options="-parameters" />
       <module name="studentservice" options="-parameters" />
     </option>
   </component>
