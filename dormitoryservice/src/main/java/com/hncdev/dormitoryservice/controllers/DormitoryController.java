@@ -2,11 +2,11 @@ package com.hncdev.dormitoryservice.controllers;
 
 import com.hncdev.dormitoryservice.services.abstracts.DormitoryService;
 import com.hncdev.dormitoryservice.services.dtos.requests.AddDormitoryRequest;
+import com.hncdev.dormitoryservice.services.dtos.responses.ListDormitoryByType;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/dormitories")
@@ -18,5 +18,15 @@ public class DormitoryController {
     @PostMapping("/add")
     public void addDormitory(@RequestBody AddDormitoryRequest request) {
         dormitoryService.addDormitory(request);
+    }
+
+    @DeleteMapping("/remove/{dormitoryId}")
+    public void removeDormitory(@PathVariable String dormitoryId) {
+        dormitoryService.removeDormitory(dormitoryId);
+    }
+
+    @GetMapping("/type/{dormitoryType}")
+    public List<ListDormitoryByType> findByDormitoryType(@PathVariable String dormitoryType) {
+        return dormitoryService.findByDormitoryType(dormitoryType);
     }
 }
