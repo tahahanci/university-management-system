@@ -6,6 +6,7 @@ import com.hncdev.dormitoryservice.services.abstracts.DormitoryService;
 import com.hncdev.dormitoryservice.services.dtos.requests.AddDormitoryRequest;
 import com.hncdev.dormitoryservice.services.dtos.responses.AddDormitoryResponse;
 import com.hncdev.dormitoryservice.services.dtos.responses.ListDormitoryByType;
+import com.hncdev.dormitoryservice.services.mappers.DormitoryMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,15 +20,9 @@ public class DormitoryServiceImpl implements DormitoryService {
 
     @Override
     public AddDormitoryResponse addDormitory(AddDormitoryRequest request) {
-        Dormitory dormitory = new Dormitory();
-        dormitory.setDormitoryId(request.getDormitoryId());
-        dormitory.setDormitoryName(request.getDormitoryName());
-        dormitory.setDormitoryType(request.getDormitoryType());
-        dormitory.setCapacity(request.getCapacity());
+        Dormitory dormitory = DormitoryMapper.INSTANCE.dormitoryFromAddRequest(request);
         dormitoryRepository.save(dormitory);
-        AddDormitoryResponse response = new AddDormitoryResponse(dormitory.getDormitoryId(),
-                dormitory.getDormitoryName(), dormitory.getDormitoryType(), dormitory.getCapacity());
-        return response;
+        return DormitoryMapper.INSTANCE.addDormitoryResponseFromDormitory(dormitory);
     }
 
     @Override
