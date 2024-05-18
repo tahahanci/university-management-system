@@ -13,4 +13,5 @@ public interface DormitoryService {
     void removeDormitory(String dormitoryId);
 
     List<ListDormitoryByType> findByDormitoryType(String dormitoryType);
+
 }

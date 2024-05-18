@@ -4,8 +4,10 @@ import com.hncdev.dormitoryservice.entities.Dormitory;
 import com.hncdev.dormitoryservice.repositories.DormitoryRepository;
 import com.hncdev.dormitoryservice.services.abstracts.DormitoryService;
 import com.hncdev.dormitoryservice.services.dtos.requests.AddDormitoryRequest;
+import com.hncdev.dormitoryservice.services.dtos.requests.UpdateEmployeeRequest;
 import com.hncdev.dormitoryservice.services.dtos.responses.AddDormitoryResponse;
 import com.hncdev.dormitoryservice.services.dtos.responses.ListDormitoryByType;
+import com.hncdev.dormitoryservice.services.dtos.responses.UpdateEmployeeResponse;
 import com.hncdev.dormitoryservice.services.mappers.DormitoryMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -36,4 +38,5 @@ public class DormitoryServiceImpl implements DormitoryService {
     public List<ListDormitoryByType> findByDormitoryType(String dormitoryType) {
         return dormitoryRepository.findByDormitoryType(dormitoryType);
     }
+
 }
