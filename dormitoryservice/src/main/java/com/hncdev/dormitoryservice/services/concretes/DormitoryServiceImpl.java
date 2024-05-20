@@ -4,8 +4,10 @@ import com.hncdev.dormitoryservice.entities.Dormitory;
 import com.hncdev.dormitoryservice.repositories.DormitoryRepository;
 import com.hncdev.dormitoryservice.services.abstracts.DormitoryService;
 import com.hncdev.dormitoryservice.services.dtos.requests.AddDormitoryRequest;
+import com.hncdev.dormitoryservice.services.dtos.requests.FilterDormitoryByRequest;
 import com.hncdev.dormitoryservice.services.dtos.requests.UpdateEmployeeRequest;
 import com.hncdev.dormitoryservice.services.dtos.responses.AddDormitoryResponse;
+import com.hncdev.dormitoryservice.services.dtos.responses.FilterDormitoryByResponse;
 import com.hncdev.dormitoryservice.services.dtos.responses.ListDormitoryByType;
 import com.hncdev.dormitoryservice.services.dtos.responses.UpdateEmployeeResponse;
 import com.hncdev.dormitoryservice.services.mappers.DormitoryMapper;
@@ -39,4 +41,8 @@ public class DormitoryServiceImpl implements DormitoryService {
         return dormitoryRepository.findByDormitoryType(dormitoryType);
     }
 
+    @Override
+    public List<FilterDormitoryByResponse> search(FilterDormitoryByRequest request) {
+        return dormitoryRepository.search(request);
+    }
 }

@@ -1,5 +1,6 @@
 package com.hncdev.dormitoryservice.services.concretes;
 
+import com.hncdev.dormitoryservice.entities.Dormitory;
 import com.hncdev.dormitoryservice.entities.Employee;
 import com.hncdev.dormitoryservice.repositories.DormitoryRepository;
 import com.hncdev.dormitoryservice.repositories.EmployeeRepository;
@@ -35,7 +36,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = employeeRepository.findByEmployeeId(employeeId).orElseThrow(
                 () -> new RuntimeException("Employee not found")
         );
-        employee = EmployeeMapper.INSTANCE.employeeFromUpdateRequest(employee, request);
+        employee.setFirstName(request.getFirstName());
+        employee.setLastName(request.getLastName());
+        employee.setEmail(request.getEmail());
+        employee.setPhoneNumber(request.getPhoneNumber());
+        Dormitory dormitory = dormitoryRepository.findById(request.getDormitoryId()).orElseThrow(
+                () -> new RuntimeException("Dormitory not found")
+        );
+        employee.setDormitory(dormitory);
         employeeRepository.save(employee);
         return EmployeeMapper.INSTANCE.fromEmployeeForUpdate(employee);
     }
