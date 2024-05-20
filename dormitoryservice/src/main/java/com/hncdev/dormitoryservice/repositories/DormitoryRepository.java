@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 import java.util.Optional;
 
-public interface DormitoryRepository extends JpaRepository<Dormitory, Long> {
+public interface DormitoryRepository extends JpaRepository<Dormitory, Integer> {
 
     Optional<Dormitory> findByDormitoryName(String dormitoryName);
 
