@@ -5,12 +5,15 @@ import com.hncdev.dormitoryservice.repositories.DormitoryRepository;
 import com.hncdev.dormitoryservice.repositories.EmployeeRepository;
 import com.hncdev.dormitoryservice.services.abstracts.EmployeeService;
 import com.hncdev.dormitoryservice.services.dtos.requests.AddEmployeeRequest;
+import com.hncdev.dormitoryservice.services.dtos.requests.SearchEmployeeRequest;
 import com.hncdev.dormitoryservice.services.dtos.requests.UpdateEmployeeRequest;
+import com.hncdev.dormitoryservice.services.dtos.responses.SearchEmployeeResponse;
 import com.hncdev.dormitoryservice.services.dtos.responses.UpdateEmployeeResponse;
 import com.hncdev.dormitoryservice.services.mappers.EmployeeMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -35,5 +38,18 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee = EmployeeMapper.INSTANCE.employeeFromUpdateRequest(employee, request);
         employeeRepository.save(employee);
         return EmployeeMapper.INSTANCE.fromEmployeeForUpdate(employee);
+    }
+
+    @Override
+    public void deleteEmployee(String employeeId) {
+        Employee employee = employeeRepository.findByEmployeeId(employeeId).orElseThrow(
+                () -> new RuntimeException("Employee not found")
+        );
+        employeeRepository.delete(employee);
+    }
+
+    @Override
+    public List<SearchEmployeeResponse> search(SearchEmployeeRequest request) {
+        return employeeRepository.search(request);
     }
 }
