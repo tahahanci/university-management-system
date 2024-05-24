@@ -44,4 +44,9 @@ public class DormitoryController {
                                                    @RequestBody UpdateDormitoryRequest request) {
         return dormitoryService.updateDormitory(dormitoryName, request);
     }
+
+    @GetMapping("/getDormitoryName/{dormitoryId}")
+    public String getDormitoryName(@PathVariable String dormitoryId) {
+        return dormitoryService.getDormitoryName(dormitoryId);
+    }
 }

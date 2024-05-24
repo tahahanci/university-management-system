@@ -83,4 +83,20 @@ public class StudentServiceImpl implements StudentService {
         student.addCourse(course);
         studentRepository.save(student);
     }
+
+    @Override
+    public String getStudentNameAndSurname(String studentId) {
+        Student student = studentRepository.findByStudentId(studentId).orElseThrow(
+                () -> new StudentNotFoundException("Student not found")
+        );
+        return student.getFirstName() + " " + student.getLastName();
+    }
+
+    @Override
+    public String getDepartmentName(String studentId) {
+        Student student = studentRepository.findByStudentId(studentId).orElseThrow(
+                () -> new StudentNotFoundException("Student not found")
+        );
+        return student.getDepartment().getDepartmentName();
+    }
 }

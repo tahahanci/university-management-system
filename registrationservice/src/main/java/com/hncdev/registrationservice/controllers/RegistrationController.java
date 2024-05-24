@@ -2,6 +2,7 @@ package com.hncdev.registrationservice.controllers;
 
 import com.hncdev.registrationservice.service.abstracts.RegistrationService;
 import com.hncdev.registrationservice.service.dtos.requests.RegisterStudentRequest;
+import com.hncdev.registrationservice.service.dtos.responses.RegisterStudentResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +17,7 @@ public class RegistrationController {
     private final RegistrationService registrationService;
 
     @PostMapping("/register")
-    public void registerStudent(@RequestBody RegisterStudentRequest request) {
-        registrationService.registerStudent(request);
+    public RegisterStudentResponse registerStudent(@RequestBody RegisterStudentRequest request) {
+        return registrationService.registerStudent(request);
     }
 }

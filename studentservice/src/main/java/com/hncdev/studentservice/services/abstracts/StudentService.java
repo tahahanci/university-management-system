@@ -16,4 +16,8 @@ public interface StudentService {
     UpdateStudentResponse updateStudent(String studentId, UpdateStudentRequest request);
 
     void addCourse(Integer courseId, Integer studentId);
+
+    String getStudentNameAndSurname(String studentId);
+
+    String getDepartmentName(String studentId);
 }

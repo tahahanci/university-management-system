@@ -54,4 +54,10 @@ public class DormitoryServiceImpl implements DormitoryService {
         return DormitoryMapper.INSTANCE.updateDormitoryResponseFromDormitory(dormitory);
     }
 
+    @Override
+    public String getDormitoryName(String dormitoryId) {
+        Dormitory dormitory = dormitoryRepository.findByDormitoryId(dormitoryId)
+                .orElseThrow(() -> new DormitoryNotFoundException("Dormitory not found with id: " + dormitoryId));
+        return dormitory.getDormitoryName();
+    }
 }

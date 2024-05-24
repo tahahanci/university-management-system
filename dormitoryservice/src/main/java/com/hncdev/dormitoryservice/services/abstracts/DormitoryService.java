@@ -22,4 +22,6 @@ public interface DormitoryService {
 
     UpdateDormitoryResponse updateDormitory(String dormitoryId, UpdateDormitoryRequest request);
 
+    String getDormitoryName(String dormitoryId);
+
 }

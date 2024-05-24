@@ -43,5 +43,15 @@ public class StudentController {
         studentService.addCourse(courseId, studentId);
     }
 
+    @GetMapping("/getStudentNameAndSurname/{studentId}")
+    public String getStudentNameAndSurname(@PathVariable String studentId) {
+        return studentService.getStudentNameAndSurname(studentId);
+    }
+
+    @GetMapping("/getDepartmentName/{studentId}")
+    public String getDepartmentName(@PathVariable String studentId) {
+        return studentService.getDepartmentName(studentId);
+    }
+
 
 }
