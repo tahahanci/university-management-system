@@ -31,7 +31,7 @@ public class DormitoryServiceImpl implements DormitoryService {
     @Override
     public void removeDormitory(String dormitoryId) {
         Dormitory dormitory = dormitoryRepository.findByDormitoryId(dormitoryId)
-                .orElseThrow(() -> new IllegalArgumentException("Dormitory not found with id: " + dormitoryId));
+                .orElseThrow(() -> new DormitoryNotFoundException("Dormitory not found with id: " + dormitoryId));
         dormitoryRepository.delete(dormitory);
     }
 
