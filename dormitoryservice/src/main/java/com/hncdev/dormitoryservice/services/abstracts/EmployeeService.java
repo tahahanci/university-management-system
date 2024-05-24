@@ -5,7 +5,6 @@ import com.hncdev.dormitoryservice.services.dtos.requests.SearchEmployeeRequest;
 import com.hncdev.dormitoryservice.services.dtos.requests.UpdateEmployeeRequest;
 import com.hncdev.dormitoryservice.services.dtos.responses.SearchEmployeeResponse;
 import com.hncdev.dormitoryservice.services.dtos.responses.UpdateEmployeeResponse;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 

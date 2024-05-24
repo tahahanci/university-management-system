@@ -22,7 +22,8 @@ public class DormitoryServiceImpl implements DormitoryService {
 
     @Override
     public AddDormitoryResponse addDormitory(AddDormitoryRequest request) {
-        Dormitory dormitory = DormitoryMapper.INSTANCE.dormitoryFromAddRequest(request);
+        Dormitory dormitory = dormitoryRepository.findByDormitoryId(request.getDormitoryId())
+                .orElse(DormitoryMapper.INSTANCE.dormitoryFromAddRequest(request));
         dormitoryRepository.save(dormitory);
         return DormitoryMapper.INSTANCE.addDormitoryResponseFromDormitory(dormitory);
     }

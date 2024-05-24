@@ -1,6 +1,7 @@
 package com.hncdev.dormitoryservice.services.core.handler;
 
 import com.hncdev.dormitoryservice.services.core.details.BusinessProblemDetails;
+import com.hncdev.dormitoryservice.services.core.exception.DormitoryIsAlreadyAddedException;
 import com.hncdev.dormitoryservice.services.core.exception.DormitoryNotFoundException;
 import com.hncdev.dormitoryservice.services.core.exception.EmployeeIsAlreadyAddedException;
 import com.hncdev.dormitoryservice.services.core.exception.EmployeeNotFoundException;
@@ -31,6 +32,14 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(EmployeeNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public BusinessProblemDetails handleEmployeeNotFoundException(EmployeeNotFoundException e) {
+        BusinessProblemDetails problemDetails = new BusinessProblemDetails();
+        problemDetails.setDetail(e.getMessage());
+        return problemDetails;
+    }
+
+    @ExceptionHandler(DormitoryIsAlreadyAddedException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public BusinessProblemDetails handleDormitoryIsAlreadyAddedException(DormitoryIsAlreadyAddedException e) {
         BusinessProblemDetails problemDetails = new BusinessProblemDetails();
         problemDetails.setDetail(e.getMessage());
         return problemDetails;
