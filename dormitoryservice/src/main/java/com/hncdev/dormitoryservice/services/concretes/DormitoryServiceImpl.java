@@ -3,13 +3,11 @@ package com.hncdev.dormitoryservice.services.concretes;
 import com.hncdev.dormitoryservice.entities.Dormitory;
 import com.hncdev.dormitoryservice.repositories.DormitoryRepository;
 import com.hncdev.dormitoryservice.services.abstracts.DormitoryService;
+import com.hncdev.dormitoryservice.services.core.exception.DormitoryNotFoundException;
 import com.hncdev.dormitoryservice.services.dtos.requests.AddDormitoryRequest;
 import com.hncdev.dormitoryservice.services.dtos.requests.FilterDormitoryByRequest;
-import com.hncdev.dormitoryservice.services.dtos.requests.UpdateEmployeeRequest;
-import com.hncdev.dormitoryservice.services.dtos.responses.AddDormitoryResponse;
-import com.hncdev.dormitoryservice.services.dtos.responses.FilterDormitoryByResponse;
-import com.hncdev.dormitoryservice.services.dtos.responses.ListDormitoryByType;
-import com.hncdev.dormitoryservice.services.dtos.responses.UpdateEmployeeResponse;
+import com.hncdev.dormitoryservice.services.dtos.requests.UpdateDormitoryRequest;
+import com.hncdev.dormitoryservice.services.dtos.responses.*;
 import com.hncdev.dormitoryservice.services.mappers.DormitoryMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -45,4 +43,14 @@ public class DormitoryServiceImpl implements DormitoryService {
     public List<FilterDormitoryByResponse> search(FilterDormitoryByRequest request) {
         return dormitoryRepository.search(request);
     }
+
+    @Override
+    public UpdateDormitoryResponse updateDormitory(String dormitoryName, UpdateDormitoryRequest request) {
+        Dormitory dormitory = dormitoryRepository.findByDormitoryName(dormitoryName).orElseThrow(
+                () -> new DormitoryNotFoundException("Dormitory not found with name: " + dormitoryName));
+        dormitory = DormitoryMapper.INSTANCE.dormitoryFromUpdateRequest(dormitory, request);
+        dormitoryRepository.save(dormitory);
+        return DormitoryMapper.INSTANCE.updateDormitoryResponseFromDormitory(dormitory);
+    }
+
 }

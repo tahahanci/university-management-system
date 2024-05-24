@@ -3,8 +3,10 @@ package com.hncdev.dormitoryservice.controllers;
 import com.hncdev.dormitoryservice.services.abstracts.DormitoryService;
 import com.hncdev.dormitoryservice.services.dtos.requests.AddDormitoryRequest;
 import com.hncdev.dormitoryservice.services.dtos.requests.FilterDormitoryByRequest;
+import com.hncdev.dormitoryservice.services.dtos.requests.UpdateDormitoryRequest;
 import com.hncdev.dormitoryservice.services.dtos.responses.FilterDormitoryByResponse;
 import com.hncdev.dormitoryservice.services.dtos.responses.ListDormitoryByType;
+import com.hncdev.dormitoryservice.services.dtos.responses.UpdateDormitoryResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,5 +37,11 @@ public class DormitoryController {
     @PostMapping("/search")
     public List<FilterDormitoryByResponse> search(@RequestBody FilterDormitoryByRequest request) {
         return dormitoryService.search(request);
+    }
+
+    @PutMapping("/update/{dormitoryName}")
+    public UpdateDormitoryResponse updateDormitory(@PathVariable String dormitoryName,
+                                                   @RequestBody UpdateDormitoryRequest request) {
+        return dormitoryService.updateDormitory(dormitoryName, request);
     }
 }
