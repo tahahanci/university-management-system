@@ -29,7 +29,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         registrationRepository.save(registration);
         RegisterStudentResponse response = new RegisterStudentResponse();
         response.setStudentName(studentServiceClient.getStudentNameAndSurname(request.getStudentId()));
-//        response.setDormitoryName(dormitoryServiceClient.getDormitoryName(request.getDormitoryId()));
+        response.setDormitoryName(dormitoryServiceClient.getDormitoryName(request.getDormitoryId()));
         response.setDepartmentName(studentServiceClient.getDepartmentName(request.getStudentId()));
         return response;
     }
