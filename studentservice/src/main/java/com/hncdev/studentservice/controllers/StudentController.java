@@ -7,6 +7,8 @@ import com.hncdev.studentservice.services.dtos.responses.ShowStudentInformation;
 import com.hncdev.studentservice.services.dtos.responses.UpdateStudentResponse;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/students")
 public class StudentController {
@@ -51,6 +53,11 @@ public class StudentController {
     @GetMapping("/getDepartmentName/{studentId}")
     public String getDepartmentName(@PathVariable String studentId) {
         return studentService.getDepartmentName(studentId);
+    }
+
+    @GetMapping("/getCourseNames/{studentId}")
+    public List<String> getCourseNames(@PathVariable String studentId) {
+        return studentService.getCourseNames(studentId);
     }
 
 

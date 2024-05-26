@@ -17,6 +17,7 @@ import com.hncdev.studentservice.services.dtos.responses.UpdateStudentResponse;
 import com.hncdev.studentservice.services.mappers.StudentMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -98,5 +99,14 @@ public class StudentServiceImpl implements StudentService {
                 () -> new StudentNotFoundException("Student not found")
         );
         return student.getDepartment().getDepartmentName();
+    }
+
+    @Override
+    public List<String> getCourseNames(String studentId) {
+        Student student = studentRepository.findByStudentId(studentId).orElseThrow(
+                () -> new StudentNotFoundException("Student not found")
+        );
+        List<String> courseNames = student.getCourses().stream().map(Course::getCourseName).toList();
+        return courseNames;
     }
 }

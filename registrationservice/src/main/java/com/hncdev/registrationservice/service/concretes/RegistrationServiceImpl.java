@@ -7,6 +7,7 @@ import com.hncdev.registrationservice.repository.RegistrationRepository;
 import com.hncdev.registrationservice.service.abstracts.RegistrationService;
 import com.hncdev.registrationservice.service.dtos.requests.RegisterStudentRequest;
 import com.hncdev.registrationservice.service.dtos.responses.RegisterStudentResponse;
+import com.hncdev.registrationservice.service.dtos.responses.ShowStudentInfoResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -40,5 +41,20 @@ public class RegistrationServiceImpl implements RegistrationService {
                 () -> new IllegalArgumentException("Student not found in registration list")
         );
         registrationRepository.delete(registration);
+    }
+
+    @Override
+    public ShowStudentInfoResponse showStudentInfo(String studentId) {
+        Registration registration = registrationRepository.findByStudentId(studentId).orElseThrow(
+                () -> new IllegalArgumentException("Student not found in registration list")
+        );
+
+        ShowStudentInfoResponse response = new ShowStudentInfoResponse();
+        response.setStudentId(registration.getStudentId());
+        response.setStudentName(studentServiceClient.getStudentNameAndSurname(registration.getStudentId()));
+        response.setDormitoryName(dormitoryServiceClient.getDormitoryName(registration.getDormitoryId()));
+        response.setDepartmentName(studentServiceClient.getDepartmentName(registration.getStudentId()));
+        response.setCourses(studentServiceClient.getCourseNames(registration.getStudentId()));
+        return response;
     }
 }

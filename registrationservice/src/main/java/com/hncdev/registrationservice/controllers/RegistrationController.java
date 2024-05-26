@@ -3,6 +3,7 @@ package com.hncdev.registrationservice.controllers;
 import com.hncdev.registrationservice.service.abstracts.RegistrationService;
 import com.hncdev.registrationservice.service.dtos.requests.RegisterStudentRequest;
 import com.hncdev.registrationservice.service.dtos.responses.RegisterStudentResponse;
+import com.hncdev.registrationservice.service.dtos.responses.ShowStudentInfoResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,5 +22,10 @@ public class RegistrationController {
     @DeleteMapping("/delete/{studentId}")
     public void deleteStudent(@PathVariable String studentId) {
         registrationService.deleteStudent(studentId);
+    }
+
+    @GetMapping("/showStudentInfo/{studentId}")
+    public ShowStudentInfoResponse showStudentInfo(@PathVariable String studentId) {
+        return registrationService.showStudentInfo(studentId);
     }
 }
