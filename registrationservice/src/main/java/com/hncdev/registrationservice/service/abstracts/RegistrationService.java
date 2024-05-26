@@ -7,4 +7,6 @@ public interface RegistrationService {
 
     RegisterStudentResponse registerStudent(RegisterStudentRequest request);
 
+    void deleteStudent(String studentId);
+
 }

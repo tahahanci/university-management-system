@@ -33,4 +33,12 @@ public class RegistrationServiceImpl implements RegistrationService {
         response.setDepartmentName(studentServiceClient.getDepartmentName(request.getStudentId()));
         return response;
     }
+
+    @Override
+    public void deleteStudent(String studentId) {
+        Registration registration = registrationRepository.findByStudentId(studentId).orElseThrow(
+                () -> new IllegalArgumentException("Student not found in registration list")
+        );
+        registrationRepository.delete(registration);
+    }
 }
