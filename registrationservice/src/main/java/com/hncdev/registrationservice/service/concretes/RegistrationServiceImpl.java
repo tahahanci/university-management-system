@@ -8,6 +8,7 @@ import com.hncdev.registrationservice.service.abstracts.RegistrationService;
 import com.hncdev.registrationservice.service.dtos.requests.RegisterStudentRequest;
 import com.hncdev.registrationservice.service.dtos.responses.RegisterStudentResponse;
 import com.hncdev.registrationservice.service.dtos.responses.ShowStudentInfoResponse;
+import com.hncdev.registrationservice.service.mappers.RegistrationMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,9 +24,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     @Override
     public RegisterStudentResponse registerStudent(RegisterStudentRequest request) {
-        Registration registration = new Registration();
-        registration.setStudentId(request.getStudentId());
-        registration.setDormitoryId(request.getDormitoryId());
+        Registration registration = RegistrationMapper.INSTANCE.registrationFromAddRequest(request);
         registration.setRegistrationDate(LocalDateTime.now());
         registrationRepository.save(registration);
         RegisterStudentResponse response = new RegisterStudentResponse();
