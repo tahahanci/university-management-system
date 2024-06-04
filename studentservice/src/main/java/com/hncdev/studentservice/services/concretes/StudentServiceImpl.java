@@ -43,17 +43,13 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public ShowStudentInformation getStudentInformation(String studentId) {
-        Student student = studentRepository.findByStudentId(studentId).orElseThrow(
-                () -> new StudentNotFoundException("Student not found")
-        );
+        Student student = isStudentExist(studentId);
         return StudentMapper.INSTANCE.fromStudent(student);
     }
 
     @Override
     public void deleteStudent(String studentId) {
-        Student student = studentRepository.findByStudentId(studentId).orElseThrow(
-                () -> new StudentNotFoundException("Student not found")
-        );
+        Student student = isStudentExist(studentId);
         studentRepository.delete(student);
     }
 
@@ -108,5 +104,11 @@ public class StudentServiceImpl implements StudentService {
         );
         List<String> courseNames = student.getCourses().stream().map(Course::getCourseName).toList();
         return courseNames;
+    }
+
+    private Student isStudentExist(String studentId) {
+        return studentRepository.findByStudentId(studentId).orElseThrow(
+                () -> new StudentNotFoundException("Student not found")
+        );
     }
 }
